@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="inherit_res_partner_views_contact_approval" model="ir.ui.view">
+    <field name="name">res.partner.view.form.inherit</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <field name="status" widget="statusbar" />
+                    <button string="Reset" type="object" name="action_reset" invisible="status not in ('approved','cancelled') " class="btn btn-primary"></button>
+                    <button string="Accept" type="object" name="action_approve" invisible="status != 'draft'" class="btn btn-primary"></button>
+                    <button string="Cancel" type="object" name="action_cancel" invisible="status != 'draft'" class="btn btn-primary"></button>
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="after">
+                <field name="approver_id" readonly="1"></field>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
